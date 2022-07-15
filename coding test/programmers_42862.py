@@ -7,7 +7,7 @@ def solution(n, lost, reserve):
     student[0] = 0
     student[-1] = 0
     # print(student)
-    
+
     # 도난당한 학생의 채육복 -1
     for i in lost:
         student[i] -= 1
