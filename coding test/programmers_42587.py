@@ -1,34 +1,31 @@
+def pri_max(temp):
+    max = 0
+    for i in range(len(temp)):
+        if temp[i][0] > max:
+            max = temp[i][0]
+    return max
+
+        
 def solution(priorities, location):
     answer = 1
-
-    max_ = max(priorities)
-    point = priorities.index(max_)
-    priorities[point] = 0
-    print(answer, 'p', priorities,'\t', 'point', point)
-    if location == point:
-        return answer
-
-    while True:
-        point += 1
-        if point == len(priorities):
-            point = 0
-
-        if priorities[point] == max(priorities):
-            priorities[point] = 0
+    
+    temp = []
+    pri_len = len(priorities)
+    pri_list = []
+    
+    for index, pri in enumerate(priorities):
+        temp.append([pri, index])
+    
+    check = 0
+    while len(pri_list) < pri_len:
+        print(temp)
+        if temp[0][0] == pri_max(temp):
+            k = temp.pop(0)
+            pri_list.append(k)
         else:
-            max_ = max(priorities)
-            point = priorities.index(max_)
-            priorities[point] = 0
-
-        answer += 1
+            k = temp.pop(check)
+            temp.append(k)
         
-        if location == point:
-            print(answer, 'p', priorities,'\t', 'point', point)
-            return answer
-        print(answer, 'p', priorities,'\t', 'point', point)
-        
-
-
-# print(solution([1, 1, 9, 1, 1, 1],	0))
-# print(solution([6, 4, 9, 2, 3, 3],	2))
-print(solution([4, 9, 4, 4, 5, 4, 2, 9],	6))
+    for i in range(len(pri_list)):
+        if pri_list[i][1] == location:
+            return i
